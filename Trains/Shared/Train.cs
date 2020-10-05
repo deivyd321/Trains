@@ -41,5 +41,8 @@ namespace Trains.Shared
 
         [Required]
         public string HomeStation { get; set; }
+
+        [Required]
+        public bool IsRenovated { get; set; }
     }
 }

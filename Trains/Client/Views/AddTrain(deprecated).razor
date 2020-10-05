@@ -2,7 +2,7 @@
 @inject HttpClient Http
 @using  Trains.Shared
 @using  Trains.Client.ViewModels
-@inject ITrainViewModel trainViewModel
+@inject ITrainsViewModel trainViewModel
 @inject NavigationManager NavigationManager
 
 <h1>Add</h1>
@@ -46,7 +46,7 @@
 
     protected async Task CreateTrain()
     {
-        await trainViewModel.AddTrainAsync(train);
+        await trainViewModel.AddOrEditTrainAsync();
         //NavigationManager.NavigateTo("/trainsdata");
     }
 

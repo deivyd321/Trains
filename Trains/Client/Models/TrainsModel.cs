@@ -7,15 +7,6 @@ using Trains.Shared;
 
 namespace Trains.Client.Models
 {
-    public interface ITrainsModel
-    {
-        Task RetrieveTrainsAsync();
-        Task AddTrainAsync(Train train);
-        Task<Train> GetTrainAsync(Guid id);
-        Task EditTrainAsync(Train train);
-        Task DeleteTrainAsync(Train train);
-        IEnumerable<Train> Trains { get; }
-    }
     public class TrainsModel : ITrainsModel
     {
         private HttpClient _http;
@@ -45,7 +36,7 @@ namespace Trains.Client.Models
             return train;
         }
 
-        public async Task EditTrainAsync(Train train)
+        public async Task UpdateTrainAsync(Train train)
         {
             var response = await _http.PutAsJsonAsync<Train>($"trains/{train.Id}", train);
             if (!response.IsSuccessStatusCode)

@@ -1,0 +1,49 @@
+﻿@using Trains.Client.ViewModels
+@using  Trains.Shared
+<h1>Add</h1>
+<h3>Train</h3>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <EditForm Model="@TrainsViewModel.Train" OnValidSubmit="@CreateTrain">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div class="form-group">
+                <label for="Name" class="control-label">Name</label>
+                <InputText for="Name" class="form-control" @bind-Value="@TrainsViewModel.Train.Name" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">License plate</label>
+                <InputText class="form-control" @bind-Value="@TrainsViewModel.Train.LicensePlate">
+                </InputText>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Company</label>
+                <InputText class="form-control" @bind-Value="@TrainsViewModel.Train.LicensePlate" />
+            </div>
+            <div class="form-group">
+                <label  class="control-label">Home station</label>
+                <InputText class="form-control" @bind-Value="@TrainsViewModel.Train.Company" />
+            </div>
+            <div class="form-group">
+                <InputCheckbox class="form-check-input" id="done" @bind-Value=@TrainsViewModel.Train.IsRenovated />
+                <label for="done" class="form-check-label">Is Renovated</label>
+            </div>
+            <div class="form-group">
+                <button class="btn" type="submit">Submit</button>
+            </div>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    [CascadingParameter(Name = "TrainsViewModel")]
+    ITrainsViewModel TrainsViewModel { get; set; }
+
+    Train train = new Train();
+
+    protected async Task CreateTrain()
+    {
+        await TrainsViewModel.AddOrEditTrainAsync();
+    }
+}

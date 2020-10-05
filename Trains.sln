@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trains.Client", "Trains\Cli
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trains.Shared", "Trains\Shared\Trains.Shared.csproj", "{7152D8C4-DBD0-46EB-8E53-8FAEC93B1C18}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trains.Client.Tests", "Trains.Client.Tests\Trains.Client.Tests.csproj", "{CAB936A3-74A7-450F-B7D8-E17BB65A9700}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trains.Client.Tests", "Trains.Client.Tests\Trains.Client.Tests.csproj", "{CAB936A3-74A7-450F-B7D8-E17BB65A9700}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

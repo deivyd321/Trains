@@ -1,0 +1,49 @@
+﻿@using Trains.Client.ViewModels
+@using Trains.Shared
+@if (TrainsViewModel?.Trains == null)
+{
+    <p><em>Loading...</em></p> }
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Licence plate</th>
+                <th>Company</th>
+                <th>Year made</th>
+                <th>Home station</th>
+                <th>Is renovated</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var train in TrainsViewModel.Trains)
+            {
+                <tr>
+                    <td>@train.Id</td>
+                    <td>@train.Name</td>
+                    <td>@train.LicensePlate</td>
+                    <td>@train.Company</td>
+                    <td>@train.YearMade</td>
+                    <td>@train.HomeStation</td>
+                    <td>@train.IsRenovated</td>
+                    <td>
+                        <a href='/edit/@train.Id'>Edit</a>  |
+                        <a href='/delete/@train.Id'>Delete</a>
+                        <button disabled="@TrainsViewModel.IsBusy" @onclick="@(() => SetTrain(train))">Edit here</button>
+                    </td>
+                </tr>
+}
+        </tbody>
+    </table>    }
+
+@code {
+    [CascadingParameter(Name = "TrainsViewModel")]
+    ITrainsViewModel TrainsViewModel { get; set; }
+
+    void SetTrain(Train train)
+    {
+        TrainsViewModel.Train = train;
+    }
+}

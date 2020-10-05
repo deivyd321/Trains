@@ -17,7 +17,7 @@ namespace Trains.Client
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
             builder.Services.AddScoped<ITrainsModel, TrainsModel>();
-            builder.Services.AddScoped<ITrainViewModel, TrainsViewModel>();
+            builder.Services.AddScoped<ITrainsViewModel, TrainsViewModel>();
 
             await builder.Build().RunAsync();
         }
