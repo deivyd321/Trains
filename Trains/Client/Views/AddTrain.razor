@@ -1,0 +1,57 @@
+﻿@page "/addtrain"
+@inject HttpClient Http
+@using  Trains.Shared
+@using  Trains.Client.ViewModels
+@inject ITrainViewModel trainViewModel
+@inject NavigationManager NavigationManager
+
+<h1>Add</h1>
+<h3>Train</h3>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <EditForm Model="@train" OnValidSubmit="@CreateTrain">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div class="form-group">
+                <label for="Name" class="control-label">Name</label>
+                <InputText for="Name" class="form-control" @bind-Value="@train.Name" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Gender" class="control-label">Gender</label>
+                <InputSelect asp-for="Gender" class="form-control" @bind-Value="@train.LicensePlate">
+                    <option value="">-- Select Gender --</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </InputSelect>
+            </div>
+            <div class="form-group">
+                <label asp-for="Department" class="control-label">Department</label>
+                <InputText asp-for="Department" class="form-control" @bind-Value="@train.Company" />
+            </div>
+            <div class="form-group">
+                <label asp-for="City" class="control-label">City</label>
+                <InputText asp-for="City" class="form-control" @bind-Value="@train.HomeStation" />
+            </div>
+            <div class="form-group">
+                <button class="btn" type="submit">Submit</button>
+                <button class="btn" @onclick="@Cancel">Cancel</button>
+            </div>
+        </EditForm>
+    </div>
+</div>
+
+@functions {
+    Train train = new Train() { Id = Guid.NewGuid() };
+
+    protected async Task CreateTrain()
+    {
+        await trainViewModel.AddTrainAsync(train);
+        //NavigationManager.NavigateTo("/trainsdata");
+    }
+
+    void Cancel()
+    {
+        NavigationManager.NavigateTo("/trainsdata");
+    }
+}

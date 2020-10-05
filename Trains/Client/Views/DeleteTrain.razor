@@ -1,0 +1,58 @@
+﻿@page "/delete/{trainId}"
+@inject HttpClient Http
+@using  Trains.Shared
+@inject NavigationManager NavigationManager
+
+<h2>Delete</h2>
+<h3>Are you sure you want to delete train with id : @trainId</h3>
+<br />
+<div class="col-md-4">
+    <table class="table">
+        <tr>
+            <td>Name</td>
+            <td>@train.Name</td>
+        </tr>
+        <tr>
+            <td>Gender</td>
+            <td>@train.Company</td>
+        </tr>
+        <tr>
+            <td>Department</td>
+            <td>@train.LicensePlate</td>
+        </tr>
+        <tr>
+            <td>City</td>
+            <td>@train.HomeStation</td>
+        </tr>
+    </table>
+    <div class="form-group">
+        <input type="submit" value="Delete" @onclick="@(async () => await Delete())" class="btn btn-default" />
+        <input type="submit" value="Cancel" @onclick="@Cancel" class="btn" />
+    </div>
+</div>
+
+@functions {
+
+    [Parameter]
+    public string trainId { get; set; }
+
+    Train train = new Train();
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(200);
+
+        //  emp = await Http.GetJsonAsync<Employee>("/api/trains/{trainId});
+    }
+
+    protected async Task Delete()
+    {
+        //await Http.SendJsonAsync(HttpMethod.Post, "/api/Employee/Create", emp);
+        await Task.Delay(200);
+        //NavigationManager.NavigateTo("/trainsdata");
+    }
+
+    void Cancel()
+    {
+        NavigationManager.NavigateTo("/trainsdata");
+    }
+}

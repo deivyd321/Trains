@@ -1,0 +1,56 @@
+﻿@page "/trainsdata"
+@using  Trains.Client.ViewModels
+@using  Trains.Shared
+@inject ITrainViewModel trainViewModel
+
+<h1>International trains system</h1>
+
+<p>This component demonstrates fetching data from the server.</p>
+<p>
+    <a href="/addtrain">Create New</a>
+</p>
+@if (trainViewModel.Trains == null)
+{
+    <p>
+        <em>Loading...</em>
+    </p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Licence plate</th>
+                <th>Company</th>
+                <th>Year made</th>
+                <th>Home station</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var train in trainViewModel.Trains)
+            {
+                <tr>
+                    <td>@train.Id</td>
+                    <td>@train.Name</td>
+                    <td>@train.LicensePlate</td>
+                    <td>@train.Company</td>
+                    <td>@train.YearMade</td>
+                    <td>@train.HomeStation</td>
+                    <td>
+                        <a href='/edit/@train.Id'>Edit</a>  |
+                        <a href='/delete/@train.Id'>Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@functions {
+    protected override async Task OnInitializedAsync()
+    {
+        await trainViewModel.RetrieveTrainsAsync();
+    }
+}
