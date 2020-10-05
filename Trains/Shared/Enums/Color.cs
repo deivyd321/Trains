@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Xml.Schema;
-
-namespace Trains.Shared.Enums
+﻿namespace Trains.Shared.Enums
 {
     public enum Color
     {

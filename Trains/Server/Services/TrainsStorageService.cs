@@ -6,6 +6,11 @@ namespace Trains.Server.Services
 {
     public class TrainsStorageService
     {
-        public HashSet<Train> Trains = new HashSet<Train>() { new Train("Lotus", 1999, Color.Blue, "ARS456", "LG", "Vilnius") };
+        public HashSet<Train> Trains;
+
+        public TrainsStorageService()
+        {
+            Trains = new HashSet<Train>() { new Train("Lotus", 1999, Color.Blue, "ARS456", "LG", "Vilnius") };
+        }
     }
 }

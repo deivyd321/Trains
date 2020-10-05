@@ -19,11 +19,11 @@
             </div>
             <div class="form-group">
                 <label class="control-label">Company</label>
-                <InputText class="form-control" @bind-Value="@TrainsViewModel.Train.LicensePlate" />
+                <InputText class="form-control" @bind-Value="@TrainsViewModel.Train.Company" />
             </div>
             <div class="form-group">
                 <label  class="control-label">Home station</label>
-                <InputText class="form-control" @bind-Value="@TrainsViewModel.Train.Company" />
+                <InputText class="form-control" @bind-Value="@TrainsViewModel.Train.HomeStation" />
             </div>
             <div class="form-group">
                 <InputCheckbox class="form-check-input" id="done" @bind-Value=@TrainsViewModel.Train.IsRenovated />
@@ -39,8 +39,6 @@
 @code {
     [CascadingParameter(Name = "TrainsViewModel")]
     ITrainsViewModel TrainsViewModel { get; set; }
-
-    Train train = new Train();
 
     protected async Task CreateTrain()
     {

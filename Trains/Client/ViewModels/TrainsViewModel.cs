@@ -50,6 +50,7 @@ namespace Trains.Client.ViewModels
             IsBusy = true;
             if (_train.Id.Equals(Guid.Empty))
             {
+                _train.Id = Guid.NewGuid();
                 await _trainsModel.AddTrainAsync(_train);
             }
             else
@@ -65,7 +66,7 @@ namespace Trains.Client.ViewModels
         {
             IsBusy = true;
             await _trainsModel.DeleteTrainAsync(_train);
-            Train = null;
+            Train = new Train();
             await RetrieveTrainsAsync();
             IsBusy = false;
         }

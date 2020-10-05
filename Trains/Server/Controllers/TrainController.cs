@@ -52,6 +52,7 @@ namespace Trains.Server.Controllers
         public void Delete(Guid id)
         {
             var train = _trainsStorageService.Trains.First(x => x.Id == id);
+            _trainsStorageService.Trains.Remove(train);
         }
     }
 }
