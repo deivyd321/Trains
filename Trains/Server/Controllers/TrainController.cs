@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Trains.Server.Services;
 using Trains.Shared;
-using Trains.Shared.Enums;
 
 namespace Trains.Server.Controllers
 {
@@ -12,15 +11,15 @@ namespace Trains.Server.Controllers
     [ApiController]
     public class TrainController : ControllerBase
     {
-        TrainsStorageService _trainsStorageService;
+        ITrainsStorageService _trainsStorageService;
 
-        public TrainController(TrainsStorageService trainsStorageService)
+        public TrainController(ITrainsStorageService trainsStorageService)
         {
             _trainsStorageService = trainsStorageService;
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Train>> Get()
+        public ActionResult<List<Train>> Get()
         {
             return Ok(_trainsStorageService.Trains.ToList());
         }
@@ -37,22 +36,24 @@ namespace Trains.Server.Controllers
         {
             // TODO add is valid
             _trainsStorageService.Trains.Add(value);
-            return Ok(value);
+            return CreatedAtAction(nameof(Post), value);
         }
 
         [HttpPut("{id}")]
-        public void Put([FromRoute] Guid id, [FromBody] Train value)
+        public IActionResult Put([FromRoute] Guid id, [FromBody] Train value)
         {
             var train = _trainsStorageService.Trains.First(x => x.Id == id);
             _trainsStorageService.Trains.Remove(train);
             _trainsStorageService.Trains.Add(value);
+            return Ok();
         }
 
         [HttpDelete("{id}")]
-        public void Delete(Guid id)
+        public IActionResult Delete(Guid id)
         {
             var train = _trainsStorageService.Trains.First(x => x.Id == id);
             _trainsStorageService.Trains.Remove(train);
+            return NoContent();
         }
     }
 }

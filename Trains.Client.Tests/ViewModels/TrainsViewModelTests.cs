@@ -24,7 +24,7 @@ namespace Trains.Client.Tests
         public async Task RetrieveTrains()
         {
             //Arrange
-            _trainsModelMock.SetupGet(x => x.Trains).Returns(new List<Train>() { new Train("Lotus", 1999, Color.Blue, "ARS456", "LG", "Vilnius") });
+            _trainsModelMock.SetupGet(x => x.Trains).Returns(new List<Train>() { new Train("Lotus", 1999, TrainColor.Blue, "ARS456", "LG", "Vilnius") });
 
             //Act
             await _trainsViewModel.RetrieveTrainsAsync();

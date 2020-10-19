@@ -1,6 +1,6 @@
 ﻿namespace Trains.Shared.Enums
 {
-    public enum Color
+    public enum TrainColor
     {
         Red = 0,
         Green = 1,

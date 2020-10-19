@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.ComponentModel.DataAnnotations;
-using Color = Trains.Shared.Enums.Color;
+using TrainColor = Trains.Shared.Enums.TrainColor;
 
 namespace Trains.Shared
 {
@@ -10,7 +10,7 @@ namespace Trains.Shared
         [JsonConstructor]
         public Train() { }
 
-        public Train(string name, int yearMade, Color color, string licensePlate, string company, string homeStation)
+        public Train(string name, int yearMade, TrainColor color, string licensePlate, string company, string homeStation)
         {
             Id = Guid.NewGuid();
             Name = name;
@@ -31,7 +31,7 @@ namespace Trains.Shared
         public string Name { get; set; }
 
         [Required]
-        public Color Color { get; set; }
+        public TrainColor Color { get; set; }
 
         [Required]
         public string LicensePlate { get; set; }
@@ -44,5 +44,15 @@ namespace Trains.Shared
 
         [Required]
         public bool IsRenovated { get; set; }
+
+        public void Edit(Train train)
+        {
+            Name = train.Name;
+            Color = train.Color;
+            LicensePlate = train.LicensePlate;
+            Company = train.Company;
+            HomeStation = train.HomeStation;
+            IsRenovated = train.IsRenovated;
+        }
     }
 }
