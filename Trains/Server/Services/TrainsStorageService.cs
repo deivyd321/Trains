@@ -11,6 +11,7 @@ namespace Trains.Server.Services
             Trains = new HashSet<TrainEntity>() { 
                 new TrainEntity("Lotus", 1999, TrainColor.Blue, "ARS456", "LG", "Vilnius"),
                 new TrainEntity("BMW", 1995, TrainColor.Green, "LOL", "VVVT", "Ryga"),
+                new TrainEntity("Audi", 2012, TrainColor.Red, "NUmber", "Viking", "Talin")
             };
         }
 

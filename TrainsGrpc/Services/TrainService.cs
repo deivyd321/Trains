@@ -56,7 +56,7 @@ namespace TrainsGrpc
                     LicensePlate = train.LicensePlate
                 });
 
-                await Task.Delay(1000);
+                await Task.Delay(2000); //grpcurl localhost:5001 train.Train/GetTrains
             }
         }
 
