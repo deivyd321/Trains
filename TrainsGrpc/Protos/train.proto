@@ -4,13 +4,11 @@ option csharp_namespace = "TrainsGrpc";
 
 package train;
 
-// The greeting service definition.
 service Train {
-  // Sends a greeting
-  rpc AddTrain (AddTrainRequest) returns (GetTrainReply);
+  rpc AddTrain (AddTrainRequest) returns (GetTrainReply){};
+  rpc GetTrains (GetTrainsRequest) returns (stream GetTrainReply){};
 }
 
-// The request message containing the user's name.
 message AddTrainRequest {
     int32 YearMade = 2;
     string Name = 3;
@@ -21,7 +19,6 @@ message AddTrainRequest {
     bool IsRenovated = 8;
 }
 
-// The response message containing the greetings.
 message GetTrainReply {
     string Id = 1;
     int32 YearMade = 2;
@@ -31,4 +28,7 @@ message GetTrainReply {
     string Company = 6;
     string HomeStation = 7;
     bool IsRenovated = 8;
+}
+
+message GetTrainsRequest {
 }

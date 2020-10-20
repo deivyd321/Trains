@@ -38,5 +38,52 @@ namespace TrainsGrpc
                 LicensePlate = train.LicensePlate
             });
         }
+
+        public override async Task GetTrains(GetTrainsRequest request, IServerStreamWriter<GetTrainReply> responseStream, ServerCallContext context)
+        {
+            await Task.Delay(500);
+
+            var train = _trainsStorageService.Trains.First();
+
+            await responseStream.WriteAsync(new GetTrainReply
+            {
+                Id = train.Id.ToString(),
+                YearMade = train.YearMade,
+                Name = train.Name,
+                Color = (int)train.Color,
+                HomeStation = train.HomeStation,
+                Company = train.Company,
+                IsRenovated = train.IsRenovated,
+                LicensePlate = train.LicensePlate
+            });
+
+            await Task.Delay(500);
+
+            await responseStream.WriteAsync(new GetTrainReply
+            {
+                Id = train.Id.ToString(),
+                YearMade = train.YearMade,
+                Name = train.Name,
+                Color = (int)train.Color,
+                HomeStation = train.HomeStation,
+                Company = train.Company,
+                IsRenovated = train.IsRenovated,
+                LicensePlate = train.LicensePlate
+            });
+
+            await Task.Delay(500);
+
+            await responseStream.WriteAsync(new GetTrainReply
+            {
+                Id = train.Id.ToString(),
+                YearMade = train.YearMade,
+                Name = train.Name,
+                Color = (int)train.Color,
+                HomeStation = train.HomeStation,
+                Company = train.Company,
+                IsRenovated = train.IsRenovated,
+                LicensePlate = train.LicensePlate
+            });
+        }
     }
 }
