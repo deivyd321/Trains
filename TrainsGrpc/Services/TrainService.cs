@@ -42,47 +42,22 @@ namespace TrainsGrpc
         {
             await Task.Delay(500);
 
-            var train = _trainsStorageService.Trains.First();
-
-            await responseStream.WriteAsync(new GetTrainReply
+            foreach (var train in _trainsStorageService.Trains)
             {
-                Id = train.Id.ToString(),
-                YearMade = train.YearMade,
-                Name = train.Name,
-                Color = (int)train.Color,
-                HomeStation = train.HomeStation,
-                Company = train.Company,
-                IsRenovated = train.IsRenovated,
-                LicensePlate = train.LicensePlate
-            });
+                await responseStream.WriteAsync(new GetTrainReply
+                {
+                    Id = train.Id.ToString(),
+                    YearMade = train.YearMade,
+                    Name = train.Name,
+                    Color = (int)train.Color,
+                    HomeStation = train.HomeStation,
+                    Company = train.Company,
+                    IsRenovated = train.IsRenovated,
+                    LicensePlate = train.LicensePlate
+                });
 
-            await Task.Delay(500);
-
-            await responseStream.WriteAsync(new GetTrainReply
-            {
-                Id = train.Id.ToString(),
-                YearMade = train.YearMade,
-                Name = train.Name,
-                Color = (int)train.Color,
-                HomeStation = train.HomeStation,
-                Company = train.Company,
-                IsRenovated = train.IsRenovated,
-                LicensePlate = train.LicensePlate
-            });
-
-            await Task.Delay(500);
-
-            await responseStream.WriteAsync(new GetTrainReply
-            {
-                Id = train.Id.ToString(),
-                YearMade = train.YearMade,
-                Name = train.Name,
-                Color = (int)train.Color,
-                HomeStation = train.HomeStation,
-                Company = train.Company,
-                IsRenovated = train.IsRenovated,
-                LicensePlate = train.LicensePlate
-            });
+                await Task.Delay(1000);
+            }
         }
 
         public override Task<GetTrainReply> EditTrain(EditTrainRequest request, ServerCallContext context)
