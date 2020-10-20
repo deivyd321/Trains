@@ -7,6 +7,8 @@ package train;
 service Train {
   rpc AddTrain (AddTrainRequest) returns (GetTrainReply){};
   rpc GetTrains (GetTrainsRequest) returns (stream GetTrainReply){};
+  rpc EditTrain (EditTrainRequest) returns (GetTrainReply){};
+  rpc DeleteTrain (DeleteTrainRequest) returns (EmptyReply){};
 }
 
 message AddTrainRequest {
@@ -31,4 +33,19 @@ message GetTrainReply {
 }
 
 message GetTrainsRequest {
+}
+
+message EditTrainRequest {
+    string Id = 1;
+    string Name = 3;
+    int32 Color = 4;
+    string LicensePlate = 5;
+    bool IsRenovated = 8;
+}
+
+message DeleteTrainRequest {
+    string Id = 1;
+}
+
+message EmptyReply {
 }

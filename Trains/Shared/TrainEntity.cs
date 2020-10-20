@@ -54,5 +54,13 @@ namespace Trains.Shared
             HomeStation = train.HomeStation;
             IsRenovated = train.IsRenovated;
         }
+
+        public void Edit(string name, TrainColor color, string licensePlate, bool isRenovated)
+        {
+            Name = name;
+            Color = color;
+            LicensePlate = licensePlate;
+            IsRenovated = isRenovated;
+        }
     }
 }
