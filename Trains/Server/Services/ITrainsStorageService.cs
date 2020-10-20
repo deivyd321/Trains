@@ -5,6 +5,6 @@ namespace Trains.Server.Services
 {
     public interface ITrainsStorageService
     {
-        HashSet<Train> Trains { get; }
+        HashSet<TrainEntity> Trains { get; }
     }
 }

@@ -5,12 +5,12 @@ using TrainColor = Trains.Shared.Enums.TrainColor;
 
 namespace Trains.Shared
 {
-    public class Train
+    public class TrainEntity
     {
         [JsonConstructor]
-        public Train() { }
+        public TrainEntity() { }
 
-        public Train(string name, int yearMade, TrainColor color, string licensePlate, string company, string homeStation)
+        public TrainEntity(string name, int yearMade, TrainColor color, string licensePlate, string company, string homeStation)
         {
             Id = Guid.NewGuid();
             Name = name;
@@ -45,7 +45,7 @@ namespace Trains.Shared
         [Required]
         public bool IsRenovated { get; set; }
 
-        public void Edit(Train train)
+        public void Edit(TrainEntity train)
         {
             Name = train.Name;
             Color = train.Color;

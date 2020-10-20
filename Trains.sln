@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trains.Shared", "Trains\Sha
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trains.Client.Tests", "Trains.Client.Tests\Trains.Client.Tests.csproj", "{CAB936A3-74A7-450F-B7D8-E17BB65A9700}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trains.Server.Tests", "Trains.Server.Tests\Trains.Server.Tests.csproj", "{0B80958A-FCEC-4EE8-A3D6-F2C0687A63CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trains.Server.Tests", "Trains.Server.Tests\Trains.Server.Tests.csproj", "{0B80958A-FCEC-4EE8-A3D6-F2C0687A63CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainsGrpc", "TrainsGrpc\TrainsGrpc.csproj", "{60EFB4D0-6547-4542-A447-5AC877BAF1EA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{0B80958A-FCEC-4EE8-A3D6-F2C0687A63CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B80958A-FCEC-4EE8-A3D6-F2C0687A63CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B80958A-FCEC-4EE8-A3D6-F2C0687A63CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60EFB4D0-6547-4542-A447-5AC877BAF1EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60EFB4D0-6547-4542-A447-5AC877BAF1EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60EFB4D0-6547-4542-A447-5AC877BAF1EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60EFB4D0-6547-4542-A447-5AC877BAF1EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

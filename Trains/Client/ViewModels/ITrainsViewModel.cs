@@ -9,8 +9,8 @@ namespace Trains.Client.ViewModels
     public interface ITrainsViewModel
     {
         bool IsBusy { get; set; }
-        Train Train { get; set; }
-        IEnumerable<Train> Trains { get; set; }
+        TrainEntity Train { get; set; }
+        IEnumerable<TrainEntity> Trains { get; set; }
         Task RetrieveTrainsAsync();
         Task GetTrainAsync(Guid id);
         Task AddOrEditTrainAsync();

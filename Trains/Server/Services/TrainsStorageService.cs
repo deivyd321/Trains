@@ -8,9 +8,9 @@ namespace Trains.Server.Services
     {
         public TrainsStorageService()
         {
-            Trains = new HashSet<Train>() { new Train("Lotus", 1999, TrainColor.Blue, "ARS456", "LG", "Vilnius") };
+            Trains = new HashSet<TrainEntity>() { new TrainEntity("Lotus", 1999, TrainColor.Blue, "ARS456", "LG", "Vilnius") };
         }
 
-        public HashSet<Train> Trains { get; }
+        public HashSet<TrainEntity> Trains { get; }
     }
 }

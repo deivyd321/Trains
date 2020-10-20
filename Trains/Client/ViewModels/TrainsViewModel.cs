@@ -10,16 +10,16 @@ namespace Trains.Client.ViewModels
     public class TrainsViewModel : BaseViewModel, ITrainsViewModel
     {
         private ITrainsModel _trainsModel;
-        private Train _train = new Train();
-        private IEnumerable<Train> _trains;
+        private TrainEntity _train = new TrainEntity();
+        private IEnumerable<TrainEntity> _trains;
 
-        public IEnumerable<Train> Trains
+        public IEnumerable<TrainEntity> Trains
         {
             get => _trains;
             set => _trains = value;
         }
 
-        public Train Train
+        public TrainEntity Train
         {
             get => _train;
             set
@@ -57,7 +57,7 @@ namespace Trains.Client.ViewModels
             {
                 await _trainsModel.UpdateTrainAsync(_train);
             }
-            Train = new Train();
+            Train = new TrainEntity();
             await RetrieveTrainsAsync();
             IsBusy = false;
         }
@@ -66,7 +66,7 @@ namespace Trains.Client.ViewModels
         {
             IsBusy = true;
             await _trainsModel.DeleteTrainAsync(_train);
-            Train = new Train();
+            Train = new TrainEntity();
             await RetrieveTrainsAsync();
             IsBusy = false;
         }

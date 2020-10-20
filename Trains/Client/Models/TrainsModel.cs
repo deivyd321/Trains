@@ -11,8 +11,8 @@ namespace Trains.Client.Models
     {
         private HttpClient _http;
 
-        private IEnumerable<Train> _trains;
-        public IEnumerable<Train> Trains { get => _trains; }
+        private IEnumerable<TrainEntity> _trains;
+        public IEnumerable<TrainEntity> Trains { get => _trains; }
 
         public TrainsModel(HttpClient http)
         {
@@ -20,30 +20,30 @@ namespace Trains.Client.Models
         }
         public async Task RetrieveTrainsAsync()
         {
-            _trains = await _http.GetFromJsonAsync<IEnumerable<Train>>("trains");
+            _trains = await _http.GetFromJsonAsync<IEnumerable<TrainEntity>>("trains");
         }
 
-        public async Task AddTrainAsync(Train train)
+        public async Task AddTrainAsync(TrainEntity train)
         {
             var response = await _http.PostAsJsonAsync("trains", train);
             if (!response.IsSuccessStatusCode)
                 throw new InvalidOperationException(await response.Content.ReadAsStringAsync());
         }
 
-        public async Task<Train> GetTrainAsync(Guid id)
+        public async Task<TrainEntity> GetTrainAsync(Guid id)
         {
-            var train = await _http.GetFromJsonAsync<Train>($"trains/{id}");
+            var train = await _http.GetFromJsonAsync<TrainEntity>($"trains/{id}");
             return train;
         }
 
-        public async Task UpdateTrainAsync(Train train)
+        public async Task UpdateTrainAsync(TrainEntity train)
         {
-            var response = await _http.PutAsJsonAsync<Train>($"trains/{train.Id}", train);
+            var response = await _http.PutAsJsonAsync<TrainEntity>($"trains/{train.Id}", train);
             if (!response.IsSuccessStatusCode)
                 throw new InvalidOperationException(await response.Content.ReadAsStringAsync());
         }
 
-        public async Task DeleteTrainAsync(Train train)
+        public async Task DeleteTrainAsync(TrainEntity train)
         {
             var response = await _http.DeleteAsync($"trains/{train.Id}");
             if (!response.IsSuccessStatusCode)

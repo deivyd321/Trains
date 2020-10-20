@@ -19,20 +19,20 @@ namespace Trains.Server.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<Train>> Get()
+        public ActionResult<List<TrainEntity>> Get()
         {
             return Ok(_trainsStorageService.Trains.ToList());
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Train> Get(Guid id)
+        public ActionResult<TrainEntity> Get(Guid id)
         {
             var train = _trainsStorageService.Trains.First(x=>x.Id == id);
             return Ok(train);
         }
 
         [HttpPost]
-        public ActionResult<Train> Post([FromBody] Train value)
+        public ActionResult<TrainEntity> Post([FromBody] TrainEntity value)
         {
             // TODO add is valid
             _trainsStorageService.Trains.Add(value);
@@ -40,7 +40,7 @@ namespace Trains.Server.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put([FromRoute] Guid id, [FromBody] Train value)
+        public IActionResult Put([FromRoute] Guid id, [FromBody] TrainEntity value)
         {
             var train = _trainsStorageService.Trains.First(x => x.Id == id);
             _trainsStorageService.Trains.Remove(train);
