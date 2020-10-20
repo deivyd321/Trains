@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Trains.Server.Controllers;
 using Trains.Server.Services;
@@ -78,15 +79,28 @@ namespace Trains.Server.Tests
             // Arrange
             var trainMock = new TrainEntity("Lotus", 1999, TrainColor.Blue, "ARS456", "LG", "Vilnius");
             _trainsStorageServiceMock.Setup(x => x.Trains).Returns(new HashSet<TrainEntity>() { trainMock });
-            trainMock.LicensePlate = "AA";
+            var trainUpdate = new TrainEntity("Lotus", 1999, TrainColor.Blue, "AAAAA", "LG", "Vilnius");
 
             // Act
-            var result = _trainController.Put(trainMock.Id, trainMock);
+            var result = _trainController.Put(trainMock.Id, trainUpdate);
 
             // Assert
             Assert.IsType<OkResult>(result);
-            Assert.Equal(trainMock.LicensePlate, _trainsStorageServiceMock.Object.Trains.First().LicensePlate);
+            Assert.Equal(trainUpdate.LicensePlate, _trainsStorageServiceMock.Object.Trains.First().LicensePlate);
             _trainsStorageServiceMock.VerifyGet(x => x.Trains);
+        }
+
+        [Fact]
+        public void Put_InvalidProperty_ThrowsException()
+        {
+            // Arrange
+            var trainMock = new TrainEntity("Lotus", 1999, TrainColor.Blue, "ARS456", "LG", "Vilnius");
+            _trainsStorageServiceMock.Setup(x => x.Trains).Returns(new HashSet<TrainEntity>() { trainMock });
+            var trainUpdate = new TrainEntity("Lotus", 1999, TrainColor.Blue, "AA", "LG", "Vilnius");
+
+            // Act and assert
+            Assert.Throws<InvalidDataException>(()=> _trainController.Put(trainMock.Id, trainUpdate));
+            Assert.Equal(trainMock.LicensePlate, _trainsStorageServiceMock.Object.Trains.First().LicensePlate);
         }
 
         [Fact]

@@ -43,8 +43,7 @@ namespace Trains.Server.Controllers
         public IActionResult Put([FromRoute] Guid id, [FromBody] TrainEntity value)
         {
             var train = _trainsStorageService.Trains.First(x => x.Id == id);
-            _trainsStorageService.Trains.Remove(train);
-            _trainsStorageService.Trains.Add(value);
+            train.Edit(value.Name, value.Color, value.LicensePlate, value.IsRenovated);
             return Ok();
         }
 

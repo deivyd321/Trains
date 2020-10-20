@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
+using System.Linq;
 using TrainColor = Trains.Shared.Enums.TrainColor;
 
 namespace Trains.Shared
@@ -57,6 +59,8 @@ namespace Trains.Shared
 
         public void Edit(string name, TrainColor color, string licensePlate, bool isRenovated)
         {
+            if (licensePlate.Count() < 3)
+                throw new InvalidDataException("licence plate cannot be shorter than 3");
             Name = name;
             Color = color;
             LicensePlate = licensePlate;
