@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Trains.Server.Hubs;
 using Trains.Server.Services;
 
 namespace Trains.Server
@@ -23,6 +24,7 @@ namespace Trains.Server
             services.AddSingleton<ITrainsStorageService, TrainsStorageService>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,6 +50,7 @@ namespace Trains.Server
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHub<AsyncEnumerableHub>("streamHub");
                 endpoints.MapRazorPages();
                 endpoints.MapControllers();
                 endpoints.MapFallbackToFile("index.html");

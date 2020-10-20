@@ -2,6 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Threading;
+using System.Threading.Tasks;
 using Trains.Server.Services;
 using Trains.Shared;
 
@@ -27,7 +30,7 @@ namespace Trains.Server.Controllers
         [HttpGet("{id}")]
         public ActionResult<Train> Get(Guid id)
         {
-            var train = _trainsStorageService.Trains.First(x=>x.Id == id);
+            var train = _trainsStorageService.Trains.First(x => x.Id == id);
             return Ok(train);
         }
 
@@ -54,6 +57,27 @@ namespace Trains.Server.Controllers
             var train = _trainsStorageService.Trains.First(x => x.Id == id);
             _trainsStorageService.Trains.Remove(train);
             return NoContent();
+        }
+
+        [Htt("async")]
+        public async IAsyncEnumerable<int> Counter(
+            [EnumeratorCancellation]
+            CancellationToken cancellationToken,
+            int count = 10,
+            int delay = 2000)
+        {
+            for (var i = 0; i < count; i++)
+            {
+                // Check the cancellation token regularly so that the server will stop
+                // producing items if the client disconnects.
+                cancellationToken.ThrowIfCancellationRequested();
+
+                yield return i;
+
+                // Use the cancellationToken in other APIs that accept cancellation
+                // tokens so the cancellation can flow down to them.
+                await Task.Delay(delay, cancellationToken);
+            }
         }
     }
 }
