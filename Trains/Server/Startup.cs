@@ -1,8 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Data.SqlClient;
+using Trains.Server.DataModels;
+using Trains.Server.Repositories;
 using Trains.Server.Services;
 
 namespace Trains.Server
@@ -20,16 +24,31 @@ namespace Trains.Server
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<ITrainsStorageService, TrainsStorageService>();
+            var connectionString = Configuration.GetConnectionString("Trains");
+            services.AddDbContext<TrainContext>(options =>
+                options.UseSqlServer(connectionString, optionsBuilder =>
+                    optionsBuilder.MigrationsAssembly("Trains.Server")));
+
+            services.AddScoped(s => new SqlConnection(connectionString));
+            
+            services.AddDbContext<TrainContext>((locator, builder) =>
+            {
+                var connection = locator.GetRequiredService<SqlConnection>();
+                builder.UseSqlServer(connection);
+            });
+
+            services.AddScoped<ITrainRepository, TrainRepository>();
+            //services.AddSingleton<ITrainsStorageService, TrainsStorageService>();
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, TrainContext trainContext)
         {
             if (env.IsDevelopment())
             {
+                trainContext.Database.Migrate();
                 app.UseDeveloperExceptionPage();
                 app.UseWebAssemblyDebugging();
             }

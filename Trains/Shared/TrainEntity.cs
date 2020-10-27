@@ -23,6 +23,7 @@ namespace Trains.Shared
             HomeStation = homeStation;
         }
 
+        [Key]
         public Guid Id { get; set; }
 
         [Required]
